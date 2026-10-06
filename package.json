@@ -1,0 +1,32 @@
+{
+  "name": "pharmqms",
+  "version": "1.0.0",
+  "description": "PharmQMS — Pharmaceutical Quality Management System",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js",
+    "hash-password": "node server/utils/hashPassword.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "pharmaceutical",
+    "qms",
+    "quality-management",
+    "complaints"
+  ],
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.2",
+    "mysql2": "^3.12.0"
+  }
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Complaint — PharmQMS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-mark">PQ</span> PharmQMS</a>
+      <button class="nav-toggle" type="button" aria-label="Open menu">Menu</button>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/submit">Submit Complaint</a>
+        <a class="active" href="/track">Track Complaint</a>
+        <a href="/login">Staff Login</a>
+        <button class="theme-toggle" type="button" data-theme-toggle>Theme</button>
+      </div>
+    </div>
+  </nav>
+  <main class="page-shell">
+    <div class="container">
+      <header class="page-header">
+        <h1>Track a complaint</h1>
+        <p class="lead">Enter the complaint ID from your confirmation, for example PHQ-2026-000001.</p>
+      </header>
+      <form id="track-form" class="card" style="display:flex;gap:12px;align-items:end;flex-wrap:wrap;">
+        <div style="flex:1;min-width:240px;">
+          <label for="complaint_id">Complaint ID</label>
+          <input id="complaint_id" name="complaint_id" placeholder="PHQ-2026-000001" required>
+        </div>
+        <button class="btn btn-primary" type="submit">Track</button>
+      </form>
+      <div id="track-empty" class="card empty-state hidden"><p></p></div>
+      <section id="track-result" class="card hidden" style="margin-top:16px;">
+        <div class="meta-list">
+          <div class="meta-item"><span>Complaint ID</span><b id="t-id"></b></div>
+          <div class="meta-item"><span>Product</span><b id="t-product"></b></div>
+          <div class="meta-item"><span>Status</span><b id="t-status"></b></div>
+          <div class="meta-item"><span>Submission Date</span><b id="t-submitted"></b></div>
+          <div class="meta-item"><span>Last Updated</span><b id="t-updated"></b></div>
+          <div class="meta-item"><span>Current Stage</span><b id="t-stage"></b></div>
+        </div>
+        <h3>Progress</h3>
+        <div id="timeline" class="timeline"></div>
+      </section>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/track.js"></script>
+</body>
+</html>

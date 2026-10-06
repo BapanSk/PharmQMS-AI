@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submit Complaint — PharmQMS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-mark">PQ</span> PharmQMS</a>
+      <button class="nav-toggle" type="button" aria-label="Open menu">Menu</button>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a class="active" href="/submit">Submit Complaint</a>
+        <a href="/track">Track Complaint</a>
+        <a href="/login">Staff Login</a>
+        <button class="theme-toggle" type="button" data-theme-toggle>Theme</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-shell">
+    <div class="container">
+      <header class="page-header">
+        <h1>Submit a product complaint</h1>
+        <p class="lead">Provide accurate product and batch details so Quality Assurance can investigate promptly.</p>
+      </header>
+      <form id="complaint-form" class="card form-grid" novalidate>
+        <div>
+          <label for="customer_name">Full Name</label>
+          <input id="customer_name" name="customer_name" required>
+          <div class="field-error" data-error="customer_name"></div>
+        </div>
+        <div>
+          <label for="customer_email">Email</label>
+          <input id="customer_email" name="customer_email" type="email" required>
+          <div class="field-error" data-error="customer_email"></div>
+        </div>
+        <div>
+          <label for="customer_phone">Phone</label>
+          <input id="customer_phone" name="customer_phone" placeholder="+1-555-0100">
+          <div class="field-error" data-error="customer_phone"></div>
+        </div>
+        <div>
+          <label for="product_id">Product</label>
+          <select id="product_id" name="product_id" required></select>
+          <div class="field-error" data-error="product_id"></div>
+        </div>
+        <div>
+          <label for="batch_number">Batch Number</label>
+          <input id="batch_number" name="batch_number" required>
+          <div class="field-error" data-error="batch_number"></div>
+        </div>
+        <div>
+          <label for="category">Category</label>
+          <select id="category" name="category" required>
+            <option value="">Select category</option>
+            <option>Product Quality</option>
+            <option>Packaging</option>
+            <option>Labeling</option>
+            <option>Adverse Event</option>
+            <option>Distribution</option>
+            <option>Manufacturing</option>
+            <option>Other</option>
+          </select>
+          <div class="field-error" data-error="category"></div>
+        </div>
+        <div>
+          <label for="manufacturing_date">Manufacturing Date</label>
+          <input id="manufacturing_date" name="manufacturing_date" type="date">
+        </div>
+        <div>
+          <label for="expiry_date">Expiry Date</label>
+          <input id="expiry_date" name="expiry_date" type="date">
+        </div>
+        <div>
+          <label for="purchase_location">Purchase Location</label>
+          <input id="purchase_location" name="purchase_location">
+        </div>
+        <div>
+          <label for="country">Country/Region</label>
+          <input id="country" name="country">
+        </div>
+        <div class="full">
+          <label for="description">Complaint Description</label>
+          <textarea id="description" name="description" required placeholder="Describe what was observed, when it occurred, and any remaining product."></textarea>
+          <div class="field-error" data-error="description"></div>
+        </div>
+        <div class="full">
+          <button class="btn btn-primary" type="submit">Submit complaint</button>
+        </div>
+      </form>
+
+      <section id="success-panel" class="card success-panel hidden">
+        <h2>Complaint Submitted Successfully</h2>
+        <p>Keep this complaint ID. You can track progress at any time.</p>
+        <div class="meta-list">
+          <div class="meta-item"><span>Complaint ID</span><b id="ok-id"></b></div>
+          <div class="meta-item"><span>Submission Date</span><b id="ok-date"></b></div>
+          <div class="meta-item"><span>Current Status</span><b id="ok-status"></b></div>
+        </div>
+        <a id="track-link" class="btn btn-primary" href="/track">Track Complaint</a>
+      </section>
+    </div>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/submit.js"></script>
+</body>
+</html>

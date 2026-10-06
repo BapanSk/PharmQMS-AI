@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaints — PharmQMS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div id="app-shell">
+    <header class="app-top">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="menu-btn" id="menu-btn" type="button">Menu</button>
+        <strong>Complaint management</strong>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle" type="button" data-theme-toggle>Theme</button>
+        <div class="user-chip"><span class="avatar" id="user-avatar">Q</span><span id="user-name"></span> · <span id="user-role"></span></div>
+      </div>
+    </header>
+    <div class="app-content">
+      <form id="filter-form" class="card filters">
+        <input id="search" placeholder="Search ID, customer, batch, product">
+        <select id="status">
+          <option value="">All statuses</option>
+          <option>New</option>
+          <option>AI Analyzed</option>
+          <option>QA Review</option>
+          <option>Under Investigation</option>
+          <option>Corrective Action</option>
+          <option>Resolved</option>
+          <option>Closed</option>
+        </select>
+        <select id="severity">
+          <option value="">All severity</option>
+          <option>Critical</option>
+          <option>Major</option>
+          <option>Minor</option>
+        </select>
+        <select id="priority">
+          <option value="">All priority</option>
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
+        <select id="category">
+          <option value="">All categories</option>
+          <option>Product Quality</option>
+          <option>Packaging</option>
+          <option>Labeling</option>
+          <option>Adverse Event</option>
+          <option>Distribution</option>
+          <option>Manufacturing</option>
+          <option>Other</option>
+        </select>
+        <select id="product"><option value="">All products</option></select>
+        <input id="date_from" type="date">
+        <input id="date_to" type="date">
+        <select id="sort">
+          <option value="created_at">Sort: date</option>
+          <option value="complaint_id">Sort: ID</option>
+          <option value="status">Sort: status</option>
+          <option value="severity">Sort: severity</option>
+          <option value="priority">Sort: priority</option>
+        </select>
+        <select id="dir">
+          <option value="desc">Desc</option>
+          <option value="asc">Asc</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Apply</button>
+      </form>
+      <article class="card">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Complaint ID</th>
+                <th>Product</th>
+                <th>Category</th>
+                <th>Severity</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Submitted Date</th>
+                <th>Assigned To</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+        </div>
+        <div class="pagination">
+          <button class="btn btn-secondary btn-sm" id="prev" type="button">Previous</button>
+          <span id="page-info"></span>
+          <button class="btn btn-secondary btn-sm" id="next" type="button">Next</button>
+        </div>
+      </article>
+    </div>
+  </div>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/staff.js"></script>
+  <script src="/js/complaints.js"></script>
+  <script>
+    PharmStaff.boot('complaints', () => PharmComplaints.init());
+  </script>
+</body>
+</html>

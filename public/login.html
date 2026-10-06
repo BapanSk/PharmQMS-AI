@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Staff Login — PharmQMS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a class="brand" href="/"><span class="brand-mark">PQ</span> PharmQMS</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/submit">Submit Complaint</a>
+        <a href="/track">Track Complaint</a>
+        <button class="theme-toggle" type="button" data-theme-toggle>Theme</button>
+      </div>
+    </div>
+  </nav>
+  <main class="auth-wrap">
+    <form id="login-form" class="card auth-card" novalidate>
+      <h1>Staff login</h1>
+      <p class="lead">Sign in to the quality workspace.</p>
+      <div id="login-error" class="field-error"></div>
+      <div style="margin:16px 0;">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" autocomplete="username" required>
+      </div>
+      <div style="margin-bottom:16px;">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <label style="display:flex;gap:8px;align-items:center;font-weight:600;margin-bottom:16px;">
+        <input id="remember" type="checkbox" style="width:auto;"> Remember me on this device
+      </label>
+      <button class="btn btn-primary" type="submit" style="width:100%;">Sign in</button>
+    </form>
+  </main>
+  <script src="/js/api.js"></script>
+  <script src="/js/app.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const errorBox = document.getElementById('login-error');
+      errorBox.textContent = '';
+      const button = event.target.querySelector('button[type="submit"]');
+      PharmApp.setButtonLoading(button, true);
+      try {
+        const data = await PharmAPI.post('/api/auth/login', {
+          email: document.getElementById('email').value.trim(),
+          password: document.getElementById('password').value
+        });
+        PharmAPI.setSession(data.token, data.user, document.getElementById('remember').checked);
+        window.location.replace('/dashboard');
+      } catch (error) {
+        errorBox.textContent = error.status === 401
+          ? 'Invalid email or password. Please try again.'
+          : PharmApp.friendlyError(error);
+      } finally {
+        PharmApp.setButtonLoading(button, false);
+      }
+    });
+  </script>
+</body>
+</html>

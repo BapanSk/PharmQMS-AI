@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — PharmQMS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div id="app-shell">
+    <header class="app-top">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="menu-btn" id="menu-btn" type="button">Menu</button>
+        <div>
+          <div class="eyebrow">Quality workspace</div>
+          <strong id="welcome">Dashboard</strong>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <select id="range-filter" class="range-select">
+          <option value="7d">Last 7 days</option>
+          <option value="30d">Last 30 days</option>
+          <option value="90d">Last 90 days</option>
+          <option value="year" selected>This year</option>
+        </select>
+        <button class="theme-toggle" type="button" data-theme-toggle>Theme</button>
+        <div class="user-chip"><span class="avatar" id="user-avatar">Q</span><span id="user-name"></span> · <span id="user-role"></span></div>
+      </div>
+    </header>
+    <div class="app-content">
+      <div class="stats-grid">
+        <article class="card stat-card"><h4>Total Complaints</h4><div class="value" id="s-total">0</div></article>
+        <article class="card stat-card"><h4>New Complaints</h4><div class="value" id="s-new">0</div></article>
+        <article class="card stat-card"><h4>AI Analyzed</h4><div class="value" id="s-ai">0</div></article>
+        <article class="card stat-card"><h4>Under Investigation</h4><div class="value" id="s-inv">0</div></article>
+        <article class="card stat-card"><h4>Resolved</h4><div class="value" id="s-res">0</div></article>
+        <article class="card stat-card"><h4>Critical / High</h4><div class="value" id="s-crit">0</div></article>
+      </div>
+      <div class="charts-grid">
+        <article class="card chart-box"><h3>Complaints by Month</h3><canvas id="chart-month"></canvas></article>
+        <article class="card chart-box"><h3>Complaints by Category</h3><canvas id="chart-category"></canvas></article>
+        <article class="card chart-box"><h3>Complaints by Severity</h3><canvas id="chart-severity"></canvas></article>
+        <article class="card chart-box"><h3>Complaints by Priority</h3><canvas id="chart-priority"></canvas></article>
+        <article class="card chart-box chart-wide"><h3>Status Distribution</h3><canvas id="chart-status"></canvas></article>
+      </div>
+      <article class="card table-card">
+        <h3>Recent complaints</h3>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Complaint ID</th><th>Product</th><th>Category</th><th>Severity</th><th>Status</th><th>Submitted</th>
+              </tr>
+            </thead>
+            <tbody id="recent-body"></tbody>
+          </table>
+        </div>
+      </article>
+    </div>
+  </div>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/staff.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script>
+    PharmStaff.boot('dashboard', (user) => PharmDashboard.init(user));
+  </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complaint details — PharmQMS</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+  <div id="app-shell">
+    <header class="app-top">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="menu-btn" id="menu-btn" type="button">Menu</button>
+        <div>
+          <div class="eyebrow">Complaint record</div>
+          <strong id="title-id">Loading...</strong>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="theme-toggle" type="button" data-theme-toggle>Theme</button>
+        <div class="user-chip"><span class="avatar" id="user-avatar">Q</span><span id="user-name"></span> · <span id="user-role"></span></div>
+      </div>
+    </header>
+    <div class="app-content" id="details-root">
+      <div class="action-row">
+        <button class="btn btn-secondary" id="btn-edit" type="button">Edit Complaint</button>
+        <button class="btn btn-secondary" id="btn-status" type="button">Change Status</button>
+        <button class="btn btn-secondary" id="btn-assign" type="button">Assign QA</button>
+        <button class="btn btn-secondary" id="btn-reanalyze" type="button">Re-analyze</button>
+        <a class="btn btn-ghost" href="/complaints">Back to list</a>
+      </div>
+      <div class="details-grid">
+        <div>
+          <article class="card"><h3>Customer Information</h3><div id="customer-card"></div></article>
+          <article class="card" style="margin-top:16px;"><h3>Product Information</h3><div id="product-card"></div></article>
+          <article class="card" style="margin-top:16px;"><h3>Complaint Description</h3><p id="desc-card"></p></article>
+          <article class="card ai-card" id="ai-card" style="margin-top:16px;"></article>
+          <article class="card" id="investigation-card" style="margin-top:16px;"></article>
+          <article class="card" style="margin-top:16px;">
+            <h3>Comments</h3>
+            <div id="comment-list" class="comment-list"></div>
+            <form id="comment-form" class="comment-form">
+              <label for="comment-text">Add Comment</label>
+              <textarea id="comment-text" required placeholder="Add investigation notes or follow-up."></textarea>
+              <button class="btn btn-primary" type="submit">Post comment</button>
+            </form>
+          </article>
+        </div>
+        <div>
+          <article class="card"><h3>Case summary</h3><div id="meta-card"></div></article>
+          <article class="card" style="margin-top:16px;">
+            <h3>Attachments</h3>
+            <div id="attachment-list" class="comment-list"></div>
+            <form id="attach-form" class="comment-form">
+              <label for="attach-file">Upload evidence (PDF, DOCX, JPG, PNG · 5 MB)</label>
+              <input id="attach-file" type="file" accept=".pdf,.docx,.jpg,.jpeg,.png" required>
+              <button class="btn btn-secondary" type="submit">Upload</button>
+            </form>
+          </article>
+          <article class="card" style="margin-top:16px;"><h3>Workflow timeline</h3><div id="history-list" class="timeline"></div></article>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/staff.js"></script>
+  <script src="/js/complaint-details.js"></script>
+  <script>
+    PharmStaff.boot('complaints', (user) => PharmDetails.init(user));
+  </script>
+</body>
+</html>
